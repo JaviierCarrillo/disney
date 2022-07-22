@@ -28,5 +28,4 @@ public class CharacterEntity {
             joinColumns = @JoinColumn(name = "character_id"),
             inverseJoinColumns = @JoinColumn(name = "movie_id"))
     private List<MovieEntity> movies = new ArrayList<>();
-
 }
