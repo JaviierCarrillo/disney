@@ -8,6 +8,8 @@ import com.alkemy.disney.disney.service.GenreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class GenreServiceImpl implements GenreService {
 
@@ -19,6 +21,12 @@ public class GenreServiceImpl implements GenreService {
         GenreEntity entity = genreMapper.genreDTO2Entity(dto);
         GenreEntity entitySaved = genreRepository.save(entity);
         GenreDTO result = genreMapper.genreEntity2DTO(entitySaved);
+        return result;
+    }
+
+    public List<GenreDTO> getAllGenres() {
+        List<GenreEntity> entities = genreRepository.findAll();
+        List<GenreDTO> result = genreMapper.genreEntityList2DTOList(entities);
         return result;
     }
 

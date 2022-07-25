@@ -5,12 +5,18 @@ import com.alkemy.disney.disney.entity.GenreEntity;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Getter
 @Setter
-public class GenreDTO {
+public class MovieDTO {
     private Long id;
-    private String name;
     private String image;
+    private String title;
+    private LocalDate creationDate;
+    private Long qualification;
+    private GenreEntity genre;
+    private Long genreId;
+    private List<CharacterEntity> characters;
 }
