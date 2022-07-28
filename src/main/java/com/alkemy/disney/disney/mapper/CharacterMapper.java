@@ -1,7 +1,9 @@
 package com.alkemy.disney.disney.mapper;
 
 import com.alkemy.disney.disney.dto.CharacterDTO;
+import com.alkemy.disney.disney.dto.MovieDTO;
 import com.alkemy.disney.disney.entity.CharacterEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -9,6 +11,10 @@ import java.util.List;
 
 @Component
 public class CharacterMapper {
+
+    @Autowired
+    private MovieMapper movieMapper;
+
     public CharacterEntity characterDTO2Entity(CharacterDTO dto) {
         CharacterEntity characterEntity = new CharacterEntity();
         characterEntity.setImage(dto.getImage());
@@ -16,11 +22,10 @@ public class CharacterMapper {
         characterEntity.setAge(dto.getAge());
         characterEntity.setWeight(dto.getWeight());
         characterEntity.setHistory(dto.getHistory());
-        characterEntity.setMovies(dto.getMovies());
         return characterEntity;
     }
 
-    public CharacterDTO characterEntity2DTO(CharacterEntity entity) {
+    public CharacterDTO characterEntity2DTO(CharacterEntity entity, boolean loadMovies) {
         CharacterDTO characterDTO = new CharacterDTO();
         characterDTO.setId(entity.getId());
         characterDTO.setImage(entity.getImage());
@@ -28,14 +33,18 @@ public class CharacterMapper {
         characterDTO.setAge(entity.getAge());
         characterDTO.setWeight(entity.getWeight());
         characterDTO.setHistory(entity.getHistory());
-        characterDTO.setMovies(entity.getMovies());
+        if(loadMovies){
+            List<MovieDTO> moviesDTO = movieMapper.movieEntityList2DTOList(entity.getMovies(), false);
+            characterDTO.setMovies(moviesDTO);
+        }
+
         return characterDTO;
     }
 
-    public List<CharacterDTO> characterEntityList2DTOList(List<CharacterEntity> characters) {
+    public List<CharacterDTO> characterEntityList2DTOList(List<CharacterEntity> characters, boolean loadMovies) {
         List<CharacterDTO> dtos = new ArrayList<>();
         for(CharacterEntity entity : characters){
-            dtos.add(characterEntity2DTO(entity));
+            dtos.add(characterEntity2DTO(entity, loadMovies));
         }
         return dtos;
     }

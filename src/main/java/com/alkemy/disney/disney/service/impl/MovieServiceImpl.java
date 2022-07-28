@@ -22,14 +22,14 @@ public class MovieServiceImpl implements MovieService {
     public MovieDTO save(MovieDTO dto) {
         MovieEntity entity = movieMapper.movieDTO2Entity(dto);
         MovieEntity entitySaved = movieRepository.save(entity);
-        MovieDTO result = movieMapper.movieEntity2DTO(entitySaved);
+        MovieDTO result = movieMapper.movieEntity2DTO(entitySaved, true);
         return result;
     }
 
     @Override
     public List<MovieDTO> getAllMovies() {
         List<MovieEntity> movies = movieRepository.findAll();
-        List<MovieDTO> result = movieMapper.movieEntityList2DTOList(movies);
+        List<MovieDTO> result = movieMapper.movieEntityList2DTOList(movies, true);
         return result;
     }
 }

@@ -34,7 +34,7 @@ public class MovieEntity {
     @Column(name = "genre_id", nullable = false)
     private Long genreId;
 
-    @ManyToMany(cascade = CascadeType.ALL, targetEntity = MovieEntity.class)
+    @ManyToMany(cascade = CascadeType.ALL, targetEntity = CharacterEntity.class)
     @JoinTable(
             name = "character_movie",
             joinColumns = @JoinColumn(name = "movie_id"),

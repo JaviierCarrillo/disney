@@ -1,6 +1,5 @@
 package com.alkemy.disney.disney.dto;
 
-import com.alkemy.disney.disney.entity.CharacterEntity;
 import com.alkemy.disney.disney.entity.GenreEntity;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,5 +17,6 @@ public class MovieDTO {
     private Long qualification;
     private GenreEntity genre;
     private Long genreId;
-    private List<CharacterEntity> characters;
+    //@JsonIgnore
+    private List<CharacterDTO> characters;
 }
