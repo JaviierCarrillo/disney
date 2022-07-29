@@ -3,7 +3,7 @@ package com.alkemy.disney.disney.service.impl;
 import com.alkemy.disney.disney.dto.GenreDTO;
 import com.alkemy.disney.disney.entity.GenreEntity;
 import com.alkemy.disney.disney.mapper.GenreMapper;
-import com.alkemy.disney.disney.repository.GenreRepository;
+import com.alkemy.disney.disney.service.repository.GenreRepository;
 import com.alkemy.disney.disney.service.GenreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
