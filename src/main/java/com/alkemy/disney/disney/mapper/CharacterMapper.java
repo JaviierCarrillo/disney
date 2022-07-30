@@ -1,5 +1,6 @@
 package com.alkemy.disney.disney.mapper;
 
+import com.alkemy.disney.disney.dto.CharacterBasicDTO;
 import com.alkemy.disney.disney.dto.CharacterDTO;
 import com.alkemy.disney.disney.dto.MovieDTO;
 import com.alkemy.disney.disney.entity.CharacterEntity;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Component
@@ -37,7 +39,6 @@ public class CharacterMapper {
             List<MovieDTO> moviesDTO = movieMapper.movieEntityList2DTOList(entity.getMovies(), false);
             characterDTO.setMovies(moviesDTO);
         }
-
         return characterDTO;
     }
 
@@ -45,6 +46,27 @@ public class CharacterMapper {
         List<CharacterDTO> dtos = new ArrayList<>();
         for(CharacterEntity entity : characters){
             dtos.add(characterEntity2DTO(entity, loadMovies));
+        }
+        return dtos;
+    }
+
+    public void characterEntityRefreshValues(CharacterEntity entity, CharacterDTO characterDTO) {
+        entity.setImage(characterDTO.getImage());
+        entity.setName(characterDTO.getName());
+        entity.setAge(characterDTO.getAge());
+        entity.setWeight(characterDTO.getWeight());
+        entity.setHistory(characterDTO.getHistory());
+    }
+
+    public List<CharacterBasicDTO> characterEntitySet2BasicDTOList(Collection<CharacterEntity> entities){
+        List<CharacterBasicDTO> dtos = new ArrayList<>();
+        CharacterBasicDTO basicDTO;
+        for (CharacterEntity entity : entities){
+            basicDTO = new CharacterBasicDTO();
+            basicDTO.setId(entity.getId());
+            basicDTO.setName(entity.getName());
+            basicDTO.setImage(entity.getImage());
+            dtos.add(basicDTO);
         }
         return dtos;
     }

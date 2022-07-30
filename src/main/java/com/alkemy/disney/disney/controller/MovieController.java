@@ -1,5 +1,6 @@
 package com.alkemy.disney.disney.controller;
 
+import com.alkemy.disney.disney.dto.MovieBasicDTO;
 import com.alkemy.disney.disney.dto.MovieDTO;
 import com.alkemy.disney.disney.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +17,33 @@ public class MovieController {
     @Autowired
     private MovieService movieService;
 
-    @GetMapping
-    public ResponseEntity<List<MovieDTO>> getAll(){
-        List<MovieDTO> movies = movieService.getAllMovies();
+    @GetMapping("/all")
+    public ResponseEntity<List<MovieBasicDTO>> getAll(){
+        List<MovieBasicDTO> movies = movieService.getAllMovies();
         return ResponseEntity.ok().body(movies);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<MovieDTO> getDetailsById(@PathVariable Long id){
+        MovieDTO movieDTO = movieService.getDetailsById(id);
+        return ResponseEntity.ok(movieDTO);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<MovieDTO>> getByFilters(
+            @RequestParam(required = false) String title,
+            @RequestParam(required = false) Long genreId,
+            @RequestParam(required = false) String creationDate,
+            @RequestParam(required = false, defaultValue = "ASC") String order
+    ){
+        List<MovieDTO> movies = movieService.getByFilters(title, genreId, creationDate, order);
+        return ResponseEntity.ok(movies);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<MovieDTO> update(@PathVariable Long id, @RequestBody MovieDTO movie){
+        MovieDTO result = movieService.update(id, movie);
+        return ResponseEntity.ok().body(result);
     }
 
     @PostMapping
