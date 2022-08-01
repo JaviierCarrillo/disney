@@ -20,7 +20,6 @@ public class MovieMapper {
     private CharacterMapper characterMapper;
 
 
-
     public MovieEntity movieDTO2Entity(MovieDTO dto) {
         MovieEntity movieEntity = new MovieEntity();
         movieEntity.setImage(dto.getImage());
@@ -44,7 +43,6 @@ public class MovieMapper {
             List<CharacterDTO> characterDTOS = characterMapper.characterEntityList2DTOList(entity.getCharacters(), false);
             movieDTO.setCharacters(characterDTOS);
         }
-
         return movieDTO;
     }
 
@@ -78,6 +76,7 @@ public class MovieMapper {
             basicDTO.setImage(entity.getImage());
             basicDTO.setTitle(entity.getTitle());
             basicDTO.setCreationDate(entity.getCreationDate().toString());
+            dtos.add(basicDTO);
         }
         return dtos;
     }

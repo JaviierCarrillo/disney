@@ -2,6 +2,7 @@ package com.alkemy.disney.disney.service;
 
 import com.alkemy.disney.disney.dto.CharacterBasicDTO;
 import com.alkemy.disney.disney.dto.CharacterDTO;
+import com.alkemy.disney.disney.entity.CharacterEntity;
 
 import java.util.List;
 import java.util.Set;
@@ -15,9 +16,4 @@ public interface CharacterService {
     CharacterDTO getDetailsById(Long id);
 
     CharacterDTO update(Long id, CharacterDTO characterDTO);
-
-    //void removeMovie(Long id, Long idMovie);
-
-    //void addMovie(Long id, Long idMovie);
-
 }

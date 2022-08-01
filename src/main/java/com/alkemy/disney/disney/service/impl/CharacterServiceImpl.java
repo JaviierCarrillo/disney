@@ -4,9 +4,8 @@ import com.alkemy.disney.disney.dto.CharacterBasicDTO;
 import com.alkemy.disney.disney.dto.CharacterDTO;
 import com.alkemy.disney.disney.dto.CharacterFiltersDTO;
 import com.alkemy.disney.disney.entity.CharacterEntity;
-import com.alkemy.disney.disney.exception.ParamNotFound;
+import com.alkemy.disney.disney.service.exception.ParamNotFound;
 import com.alkemy.disney.disney.mapper.CharacterMapper;
-import com.alkemy.disney.disney.service.MovieService;
 import com.alkemy.disney.disney.service.repository.CharacterRepository;
 import com.alkemy.disney.disney.service.repository.specifications.CharacterSpecification;
 import com.alkemy.disney.disney.service.CharacterService;
@@ -65,25 +64,6 @@ public class CharacterServiceImpl implements CharacterService {
         CharacterDTO result = characterMapper.characterEntity2DTO(entitySaved, true);
         return result;
     }
-
-    /**
-    @Override
-    public void removeMovie(Long id, Long idMovie) {
-        CharacterEntity entity = characterRepository.getById(id);
-        entity.getMovies().size();
-        MovieEntity movieEntity = movieService.getEntityById(idMovie);
-        entity.removeMovie(entity);
-        characterRepository.save(entity);
-    }*/
-
-    /**
-    public void addMovie(Long id, Long idMovie) {
-        CharacterEntity entity = characterRepository.getById(id);
-        entity.getMovies().size();
-        MovieEntity movieEntity = movieService.getEntityById(idMovie);
-        entity.addMovie(movieEntity);
-        characterRepository.save(entity);
-    }*/
 
     @Override
     public CharacterDTO save(CharacterDTO dto) {

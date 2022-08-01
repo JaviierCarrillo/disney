@@ -27,7 +27,12 @@ public class MovieSpecification {
                         )
                 );
             }
-            //TODO create idGenre filter
+
+            if(filtersDTO.getGenreId() != null){
+                predicates.add(
+                        criteriaBuilder.equal(root.get("genreId"), filtersDTO.getGenreId())
+                );
+            }
 
             if(StringUtils.hasLength(filtersDTO.getCreationDate())){
                 DateTimeFormatter formatter =DateTimeFormatter.ofPattern("yyyy-MM-dd");

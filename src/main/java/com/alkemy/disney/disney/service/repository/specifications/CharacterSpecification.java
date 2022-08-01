@@ -28,7 +28,17 @@ public class CharacterSpecification {
                 );
             }
 
-            //TODO create age and weight filters
+            if(filtersDTO.getAge() != null){
+                predicates.add(
+                        criteriaBuilder.equal(root.get("age"), filtersDTO.getAge())
+                );
+            }
+
+            if (filtersDTO.getWeight() != null){
+                predicates.add(
+                        criteriaBuilder.equal(root.get("weight"), filtersDTO.getWeight())
+                );
+            }
 
             if(!CollectionUtils.isEmpty(filtersDTO.getMovies())){
                 Join<MovieEntity, CharacterEntity> join = root.join("movies", JoinType.INNER);

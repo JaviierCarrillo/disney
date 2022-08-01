@@ -3,10 +3,12 @@ package com.alkemy.disney.disney.service.impl;
 import com.alkemy.disney.disney.dto.MovieBasicDTO;
 import com.alkemy.disney.disney.dto.MovieDTO;
 import com.alkemy.disney.disney.dto.MovieFiltersDTO;
+import com.alkemy.disney.disney.entity.CharacterEntity;
 import com.alkemy.disney.disney.entity.MovieEntity;
-import com.alkemy.disney.disney.exception.ParamNotFound;
+import com.alkemy.disney.disney.service.exception.ParamNotFound;
 import com.alkemy.disney.disney.mapper.MovieMapper;
 import com.alkemy.disney.disney.service.CharacterService;
+import com.alkemy.disney.disney.service.repository.CharacterRepository;
 import com.alkemy.disney.disney.service.repository.MovieRepository;
 import com.alkemy.disney.disney.service.MovieService;
 import com.alkemy.disney.disney.service.repository.specifications.MovieSpecification;
@@ -21,18 +23,18 @@ public class MovieServiceImpl implements MovieService {
     private MovieMapper movieMapper;
     private MovieSpecification movieSpecification;
     private MovieRepository movieRepository;
-    private CharacterService characterService;
+    private CharacterRepository characterRepository;
 
     @Autowired
     public MovieServiceImpl(
             MovieMapper movieMapper,
             MovieSpecification movieSpecification,
             MovieRepository movieRepository,
-            CharacterService characterService) {
+            CharacterRepository characterRepository) {
         this.movieMapper = movieMapper;
         this.movieSpecification = movieSpecification;
         this.movieRepository = movieRepository;
-        this.characterService = characterService;
+        this.characterRepository = characterRepository;
     }
 
     @Override
@@ -84,4 +86,21 @@ public class MovieServiceImpl implements MovieService {
         return movieDTO;
     }
 
+    @Override
+    public void addCharacter(Long id, Long idCharacter) {
+        MovieEntity entity = movieRepository.getReferenceById(id);
+        entity.getCharacters().size();
+        CharacterEntity character = characterRepository.getReferenceById(idCharacter);
+        entity.addCharacter(character);
+        movieRepository.save(entity);
+    }
+
+    @Override
+    public void removeCharacter(Long id, Long idCharacter) {
+        MovieEntity entity = movieRepository.getReferenceById(id);
+        entity.getCharacters().size();
+        CharacterEntity characterEntity = characterRepository.getReferenceById(idCharacter);
+        entity.removeCharacter(characterEntity);
+        movieRepository.save(entity);
+    }
 }

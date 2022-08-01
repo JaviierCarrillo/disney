@@ -1,4 +1,4 @@
-package com.alkemy.disney.disney.exception;
+package com.alkemy.disney.disney.service.exception;
 
 public class ParamNotFound extends RuntimeException{
     public ParamNotFound(String error){
